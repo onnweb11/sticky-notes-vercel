@@ -1,4 +1,4 @@
-'use client';
+'use client'; // ADĂUGAT: Marchează componenta ca fiind de client
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Plus, Trash2, GripHorizontal, Palette, X, Info } from 'lucide-react';
 
@@ -304,7 +304,8 @@ export default function StickyNotesApp() {
                   height: note.height,
                   zIndex: note.zIndex,
                 }}
-                className={`absolute flex flex-col rounded-lg shadow-sm transition-shadow duration-200 ${colors.bg} border ${colors.border} ${isDraggingThis ? 'shadow-xl !z-[9999] cursor-grabbing' : 'hover:shadow-md'}`}
+                // MODIFICAT: Am adăugat 'group' aici.
+                className={`group absolute flex flex-col rounded-lg shadow-sm transition-shadow duration-200 ${colors.bg} border ${colors.border} ${isDraggingThis ? 'shadow-xl !z-[9999] cursor-grabbing' : 'hover:shadow-md'}`}
                 onMouseDown={() => bringToFront(note.id)}
                 onTouchStart={() => bringToFront(note.id)}
               >
@@ -316,8 +317,8 @@ export default function StickyNotesApp() {
                 >
                   <GripHorizontal size={16} className="text-stone-500/50" />
                   
-                  {/* Color Picker Helpers */}
-                  <div className="flex space-x-1 ml-auto mr-2 group-hover:opacity-100 transition-opacity opacity-0 sm:opacity-0 note-hover-trigger">
+                  {/* Color Picker Helpers - Modificat pentru a folosi group-hover Tailwind */}
+                  <div className="flex space-x-1 ml-auto mr-2 group-hover:opacity-100 transition-opacity opacity-0 sm:opacity-0">
                      {COLOR_KEYS.map(c => (
                        <button
                         key={c}
@@ -352,15 +353,8 @@ export default function StickyNotesApp() {
                   spellCheck={false}
                 />
 
-                {/* Hover trigger for color picker (css-based for simplicity in single component) */}
-                <style jsx>{`
-                  .note-hover-trigger {
-                    opacity: 0;
-                  }
-                  div:hover > div > .note-hover-trigger {
-                    opacity: 1;
-                  }
-                `}</style>
+                {/* Blocul <style jsx> A FOST ȘTERS COMPLET pentru a rezolva eroarea Vercel/Next.js */}
+
               </div>
             );
           })}
